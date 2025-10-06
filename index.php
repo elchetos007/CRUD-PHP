@@ -11,29 +11,41 @@
 </head>
 
 <body>
-    <h1 class="text-center"> HOLA MUNDO</h1>
+    <h1 class="text-center">REGISTRO DE PERSONAL</h1>
     <div class="container-fluid row">
-        <form class="col-4">
+        <form class="col-4 p-3" method="POST" action="controlador/registro_persona.php">
             <h3 class="text-center text-secondary">Registro de personas</h3>
+            <?php
+            // Mostrar mensajes de éxito o error
+            session_start();
+            if (isset($_SESSION['success'])) {
+                echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
+                unset($_SESSION['success']);
+            }
+            if (isset($_SESSION['error'])) {
+                echo '<div class="alert alert-danger">' . $_SESSION['error'] . '</div>';
+                unset($_SESSION['error']);
+            }
+            ?>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Nombre de la Persona</label>
-                <input type="text" class="form-control" name="nombre">
+                <input type="text" class="form-control" name="nombre" required>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">apellido de la persona</label>
-                <input type="text" class="form-control" name="apellido">
+                <label for="exampleInputEmail1" class="form-label">Apellido de la persona</label>
+                <input type="text" class="form-control" name="apellido" required>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">DNI de la persona</label>
-                <input type="text" class="form-control" name="DNI">
+                <input type="text" class="form-control" name="DNI" required>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Fecha de nacimiento</label>
-                <input type="text" class="form-control" name="Fecha de nacimeinto">
+                <input type="date" class="form-control" name="fecha_de_nacimeinto" required>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Correo</label>
-                <input type="email" class="form-control" name="correo">
+                <input type="email" class="form-control" name="correo" required>
             </div>
             <button type="submit" class="btn btn-primary" name="Registrar" value="ok">Registrar</button>
         </form>
@@ -49,7 +61,6 @@
                         <th scope="col">Fecha nacimiento</th>
                         <th scope="col">Correo</th>
                         <th scope="col"></th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -57,7 +68,6 @@
                     include "modelo/conexion.php";
                     $sql = $conexion->query("select * from persona");
                     while ($datos = $sql->fetch_object()) { ?>
-
                     <tr>
                         <td><?= $datos->id ?></td>
                         <td><?= $datos->nombre ?></td>
@@ -66,12 +76,11 @@
                         <td><?= $datos->fecha_nacimiento ?></td>
                         <td><?= $datos->correo ?></td>
                         <td>
-                            <a href="" class="btn btn-sm btn-warning"><i class=" fa-solid fa-user-pen"></i></a>
-                            <a href="" class="btn btn-sm btn-danger"><i class=" fa-solid fa-trash"></i></a>
+                            <a href="" class="btn btn-sm btn-warning"><i class="fa-solid fa-user-pen"></i></a>
+                            <a href="" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
-                    <?php }
-                    ?>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
