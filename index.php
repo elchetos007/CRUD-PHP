@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CRUD PHP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/23812395d0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <h1 class="text-center">REGISTRO DE PERSONAL</h1>
+    <h1 class="text-center">CRUD PHP</h1>
     <div class="container-fluid row">
         <form class="col-4 p-3" method="POST" action="controlador/registro_persona.php">
             <h3 class="text-center text-secondary">Registro de personas</h3>
@@ -68,18 +68,19 @@
                     include "modelo/conexion.php";
                     $sql = $conexion->query("select * from persona");
                     while ($datos = $sql->fetch_object()) { ?>
-                    <tr>
-                        <td><?= $datos->id ?></td>
-                        <td><?= $datos->nombre ?></td>
-                        <td><?= $datos->apellido ?></td>
-                        <td><?= $datos->dni ?></td>
-                        <td><?= $datos->fecha_nacimiento ?></td>
-                        <td><?= $datos->correo ?></td>
-                        <td>
-                            <a href="" class="btn btn-sm btn-warning"><i class="fa-solid fa-user-pen"></i></a>
-                            <a href="" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><?= $datos->id ?></td>
+                            <td><?= $datos->nombre ?></td>
+                            <td><?= $datos->apellido ?></td>
+                            <td><?= $datos->dni ?></td>
+                            <td><?= $datos->fecha_nacimiento ?></td>
+                            <td><?= $datos->correo ?></td>
+                            <td>
+                                <a href="controlador/modificar_persona.php" class="btn btn-sm btn-warning"><i
+                                        class="fa-solid fa-user-pen"></i></a>
+                                <a href="" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
                     <?php } ?>
                 </tbody>
             </table>
